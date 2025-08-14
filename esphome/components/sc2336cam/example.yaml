@@ -11,8 +11,8 @@ esp32:
 
 # Pull your external component
 external_components:
-  - source: github://youruser/esphome-sc2336
-    components: [ sc2336_cam ]
+  - source: github://Samurai1201/esphome@sc2336
+    components: [ sc2336cam ]
 
 logger:
 

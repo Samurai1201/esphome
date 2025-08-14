@@ -6,7 +6,7 @@
 #include "esp_video.h"          // device/stream/pipeline APIs
 
 namespace esphome {
-namespace sc2336_cam {
+namespace sc2336cam {
 
 static const char *const TAG = "sc2336cam";
 
