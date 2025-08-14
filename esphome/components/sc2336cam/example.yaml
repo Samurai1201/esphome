@@ -1,0 +1,42 @@
+esphome:
+  name: p4-sc2336
+  friendly_name: P4 SC2336 Cam
+  platformio_options:
+    board_build.flash_mode: dio
+
+esp32:
+  board: esp32p4-devkit
+  framework:
+    type: esp-idf
+
+# Pull your external component
+external_components:
+  - source: github://youruser/esphome-sc2336
+    components: [ sc2336_cam ]
+
+logger:
+
+# Your P4 board likely needs I2C for SCCB over the CSI connector
+i2c:
+  sda: 17
+  scl: 18
+  id: i2c0
+  frequency: 400kHz
+
+# Expose the camera to Home Assistant
+camera:
+  - platform: custom
+    lambda: |-
+      auto cam = new esphome::sc2336_cam::SC2336Cam();
+      cam->set_width(1920);
+      cam->set_height(1080);
+      cam->set_framerate(15);
+      cam->set_use_isp(true);
+      return {cam};
+    cameras:
+      - name: "SC2336 CSI"
+
+# Optional: API/OTA/MDNS/etc.
+api:
+ota:
+mdns:
